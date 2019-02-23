@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox
 import org.imgscalr.Scalr
 import scape.editor.fs.graphics.RSImageArchive
 import scape.editor.gui.model.SpriteModel
-import scape.editor.gui.plugin.extension.SpriteExtension
 import java.io.File
 import java.net.URL
 import java.util.*
@@ -21,6 +20,7 @@ import javafx.event.ActionEvent
 import javafx.scene.control.*
 import javafx.stage.FileChooser
 import scape.editor.fs.RSArchive
+import scape.editor.fs.RSFileStore
 import scape.editor.fs.graphics.RSSprite
 import scape.editor.gui.App
 import scape.editor.gui.Settings
@@ -36,7 +36,7 @@ import java.io.DataOutputStream
 import java.io.IOException
 import javax.imageio.ImageIO
 
-class SpriteController : BaseController() {
+class Controller : BaseController() {
 
     lateinit var archiveList: ListView<ImageArchiveModel>
     lateinit var spriteList: ListView<SpriteModel>
@@ -326,8 +326,7 @@ class SpriteController : BaseController() {
         archives.clear()
         sprites.clear()
 
-        val extension = getExtension()
-        val archive = App.fs.getArchive(extension.getStoreId(), extension.getFileId())
+        val archive = App.fs.getArchive(RSFileStore.ARCHIVE_FILE_STORE, RSArchive.MEDIA_ARCHIVE)
 
         val indexHash = HashUtils.hashName("index.dat")
 
@@ -480,10 +479,9 @@ class SpriteController : BaseController() {
         }
 
         val encoded = archive.encode()
-        val extension = getExtension()
 
-        val store = App.fs.getStore(extension.getStoreId())
-        store.writeFile(extension.getFileId(), encoded)
+        val store = App.fs.getStore(RSFileStore.ARCHIVE_FILE_STORE)
+        store.writeFile(RSArchive.MEDIA_ARCHIVE, encoded)
 
         val alert = Alert(Alert.AlertType.INFORMATION)
         alert.title = "Info"
@@ -641,10 +639,6 @@ class SpriteController : BaseController() {
             }
 
         }
-    }
-
-    fun getExtension() : SpriteExtension {
-        return currentPlugin as SpriteExtension
     }
 
 }
