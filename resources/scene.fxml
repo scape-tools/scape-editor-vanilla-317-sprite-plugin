@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" styleClass="cod-gray" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plugin.SpriteController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <StackPane>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Sprite Editor" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <MenuBar styleClass="cod-gray">
+                                <menus>
+                                  <Menu mnemonicParsing="false" text="File">
+                                    <items>
+                                      <MenuItem mnemonicParsing="false" onAction="#openFS" text="Load" />
+                                          <MenuItem mnemonicParsing="false" onAction="#clearProgram" text="Clear" />
+                                          <MenuItem mnemonicParsing="false" onAction="#closeProgram" text="Close" />
+                                    </items>
+                                  </Menu>
+                                </menus>
+                              </MenuBar>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Button fx:id="minBtn" minWidth="45.0" mnemonicParsing="false" onAction="#minimizeProgram">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="maxBtn" minWidth="45.0" mnemonicParsing="false">
+                                 <HBox.margin>
+                                    <Insets right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="closeBtn" minWidth="45.0" mnemonicParsing="false" onAction="#closeProgram">
+                                 <HBox.margin>
+                                    <Insets right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <ToolBar>
+              <items>
+                <Button minWidth="100.0" mnemonicParsing="false" onAction="#pack" text="Pack" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <TabPane tabMinWidth="100.0">
+         <tabs>
+            <Tab closable="false" text="Info">
+               <content>
+                  <VBox>
+                     <children>
+                        <TitledPane animated="false" text="Image Archive">
+                           <content>
+                              <GridPane hgap="5.0" vgap="5.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="ALWAYS" />
+                                  <ColumnConstraints hgrow="ALWAYS" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Color Count" />
+                                          <Text fx:id="colorCountT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Sprite Count" />
+                                          <Text fx:id="spriteCountT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.rowIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Largest Width" />
+                                          <Text fx:id="resizeWidthT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Largest Height" />
+                                          <Text fx:id="resizeHeightT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </content>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Sprite">
+                           <content>
+                              <GridPane hgap="5.0" vgap="5.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                  <ColumnConstraints hgrow="SOMETIMES" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="OffsetX">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="offsetXTf" alignment="CENTER" onAction="#onAction" promptText="0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="OffsetY">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="offsetYTf" alignment="CENTER" onAction="#onAction" promptText="0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.rowIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Width" />
+                                          <Text fx:id="widthT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Height" />
+                                          <Text fx:id="heightT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.rowIndex="3">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Pixel Count" />
+                                          <Text fx:id="pixelCountT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Encoding Type" />
+                                          <ComboBox fx:id="encodingCb" promptText="Horizontal" />
+                                       </children>
+                                    </VBox>
+                                    <VBox GridPane.rowIndex="4">
+                                       <children>
+                                          <VBox alignment="CENTER">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="Distinct Colors" />
+                                                <Text fx:id="colorsT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white" text="0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </content>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TitledPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Preview">
+               <content>
+                  <VBox fx:id="canvasParent" alignment="CENTER">
+                     <children>
+                        <Canvas fx:id="canvas" height="256.0" width="256.0" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <right>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="spriteList" minWidth="125.0" prefWidth="125.0" visible="false" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#addSprite" text="Add" />
+                        <MenuItem mnemonicParsing="false" onAction="#removeSprite" text="Remove" />
+                        <MenuItem mnemonicParsing="false" onAction="#replaceSprite" text="Replace" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportSprite" text="Export" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </ListView>
+         </children>
+      </VBox>
+   </right>
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="archiveList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#createArchive" text="Create" />
+                        <MenuItem mnemonicParsing="false" onAction="#removeArchive" text="Remove" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportArchive" text="Export" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </ListView>
+            <TextField fx:id="searchTf" alignment="CENTER" promptText="Search...">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
