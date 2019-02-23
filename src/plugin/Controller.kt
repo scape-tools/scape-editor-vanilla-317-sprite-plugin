@@ -7,12 +7,10 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.VBox
 import org.imgscalr.Scalr
 import scape.editor.fs.graphics.RSImageArchive
-import scape.editor.gui.model.SpriteModel
 import java.io.File
 import java.net.URL
 import java.util.*
 import javafx.collections.FXCollections
-import scape.editor.gui.model.ImageArchiveModel
 import javafx.scene.text.Text
 import javafx.collections.transformation.FilteredList
 import javafx.collections.transformation.SortedList
@@ -25,7 +23,6 @@ import scape.editor.fs.graphics.RSSprite
 import scape.editor.gui.App
 import scape.editor.gui.Settings
 import scape.editor.gui.controller.BaseController
-import scape.editor.gui.model.SpriteEncodingType
 import scape.editor.gui.util.toType
 import scape.editor.gui.util.write24Int
 import scape.editor.util.HashUtils
